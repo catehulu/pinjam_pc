@@ -104,7 +104,7 @@ return [
     |
     */
 
-    'key' => env('APP_KEY'),
+    'key' => env('APP_KEY', 'base64:cdU4CyeNqnaS5exUrEB9QBW8mA8SYgHGiyh7OcORBO0='),
 
     'cipher' => 'AES-256-CBC',
 
@@ -121,8 +121,11 @@ return [
 
     'providers' => [
 
-        /*
-         * Laravel Framework Service Providers...
+        
+
+
+
+                 /* Laravel Framework Service Providers...
          */
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
