@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace Pinjam\Providers;
 
 use Illuminate\Support\ServiceProvider;
 

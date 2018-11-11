@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Pinjam\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Data;
+use Pinjam\Data;
+use Illuminate\Support\Facades\DB;
 
 class DataController extends Controller
 {
@@ -14,8 +15,18 @@ class DataController extends Controller
      */
     public function index()
     {
-        //
+        $data = Data::paginate(5);
+
+        return view('data.index', compact('data'));
     }
+
+    public function readone($id)
+    {
+        $read = DB::table('data')->where('id',$id)->first();
+
+        return view('data.readone', compact('read'));
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -34,7 +45,20 @@ class DataController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
+        $validatedData = $request->validate([
+            'NRP' => 'required|min:14',
+            'nama' => 'required',
+            'No_Telp' => 'required',
+            'Email' => 'required',
+            'Dosbing' => 'required',
+            'NIP' => 'required',
+            'Awal_Reservasi' => 'required|before:Akhir_Reservasi',
+            'Akhir_Reservasi' => 'required',
+        ]);
+
+
+
         Data::create([
             'NRP' => request('NRP'),
             'nama' => request('nama'),
@@ -45,6 +69,8 @@ class DataController extends Controller
             'Awal_Reservasi' => request('Awal_Reservasi'),
             'Akhir_Reservasi' => request('Akhir_Reservasi')
         ]);
+
+        return redirect()->route('welcome')->with('success','Data has been inputed');
     }
 
     /**
@@ -76,9 +102,15 @@ class DataController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id, $stat)
     {
-        //
+        $edit = Data::find($id);
+        $edit->update([
+            'STAT' => $stat
+        ]);
+
+        return redirect()->route('data.index')->with('success','Perubahan Sudah di Terapkan');
+
     }
 
     /**

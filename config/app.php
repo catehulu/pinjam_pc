@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Peminjaman PC NCC'),
 
     /*
     |--------------------------------------------------------------------------
@@ -157,11 +157,11 @@ return [
         /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        Pinjam\Providers\AppServiceProvider::class,
+        Pinjam\Providers\AuthServiceProvider::class,
+        // Pinjam\Providers\BroadcastServiceProvider::class,
+        Pinjam\Providers\EventServiceProvider::class,
+        Pinjam\Providers\RouteServiceProvider::class,
 
     ],
 

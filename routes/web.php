@@ -13,7 +13,7 @@
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 Auth::routes();
 
@@ -21,4 +21,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/data/create', 'DataController@create')->name('data.create');
 
+Route::get('/data', 'DataController@index')->name('data.index');
+
+Route::get('/data/readone/{id}', 'DataController@readone')->name('data.readone');
+
 Route::post('/data/create', 'DataController@store')->name('data.store');
+
+Route::patch('/data/readone/{id}/update/{stat}', 'DataController@update')->name('data.update');
