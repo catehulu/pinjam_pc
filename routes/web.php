@@ -21,10 +21,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/data/create', 'DataController@create')->name('data.create');
 
-Route::get('/data', 'DataController@index')->name('data.index');
+Route::get('/data', 'DataController@index')->name('data.index')->middleware('auth');
 
-Route::get('/data/readone/{id}', 'DataController@readone')->name('data.readone');
+Route::get('/data/readone/{id}', 'DataController@readone')->name('data.readone')->middleware('auth');
 
-Route::post('/data/create', 'DataController@store')->name('data.store');
+Route::post('/data/create', 'DataController@store')->name('data.store')->middleware('auth');
 
-Route::patch('/data/readone/{id}/update/{stat}', 'DataController@update')->name('data.update');
+Route::patch('/data/readone/{id}/update/{stat}', 'DataController@update')->name('data.update')->middleware('auth');
