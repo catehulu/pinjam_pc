@@ -19,12 +19,20 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/data/create', 'DataController@create')->name('data.create');
+Route::get('/create', 'DataController@create')->name('data.create');
 
-Route::get('/data', 'DataController@index')->name('data.index')->middleware('auth');
+Route::get('/admin', 'DataController@index')->name('data.index')->middleware('auth');
 
-Route::get('/data/readone/{id}', 'DataController@readone')->name('data.readone')->middleware('auth');
+Route::get('/admin/readone/{id}', 'DataController@readone')->name('data.readone')->middleware('auth');
 
-Route::post('/data/create', 'DataController@store')->name('data.store')->middleware('auth');
+Route::post('/create', 'DataController@store')->name('data.store');
 
-Route::patch('/data/readone/{id}/update/{stat}', 'DataController@update')->name('data.update')->middleware('auth');
+Route::patch('/admin/readone/{id}/update/{stat}', 'DataController@update')->name('data.update')->middleware('auth');
+
+Route::get('/show', 'DataController@show')->name('data.show');
+
+Route::get('/upload_berkas', function () {
+    return view('data.upload');
+})->name('data.upload');
+
+Route::patch('/upload_berkas', 'DataController@upload')->name('data.upload');
