@@ -15,7 +15,7 @@ class DataController extends Controller
      */
     public function index()
     {
-        $data = Data::paginate(5);
+        $data = Data::orderBy('created_at','DESC')->paginate(10);
 
         return view('data.index', compact('data'));
     }
@@ -70,7 +70,7 @@ class DataController extends Controller
             'Akhir_Reservasi' => request('Akhir_Reservasi')
         ]);
 
-        return redirect()->route('welcome')->with('success','Data has been inputed');
+        return redirect()->route('data.show');
     }
 
     /**
@@ -79,9 +79,11 @@ class DataController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        $read = DB::table('data')->orderBy('created_at','DESC')->first();
+
+        return view('data.show', compact('read'));
     }
 
     /**
@@ -110,6 +112,32 @@ class DataController extends Controller
         ]);
 
         return redirect()->route('data.index')->with('success','Perubahan Sudah di Terapkan');
+
+    }
+
+    public function upload(Request $request)
+    {
+        $validatedData = $request->validate([
+            'NRP' => 'required|min:14|exists:data,NRP',
+            'spesifikasi' => 'required',
+            'kebutuhan' => 'required',
+            'pdf' => 'required'
+        ]);
+
+        $filename = pathinfo($request->file('pdf')->getClientOriginalName(), PATHINFO_FILENAME);
+
+        $uniqueFilename = $filename.'_'.$request->input('NRP').'.'.$request->file('pdf')->getClientOriginalExtension();
+
+        $path = $request->file('pdf')->storeAs('public/filePDF',$uniqueFilename);
+
+        $edit = Data::where('NRP',$request->input('NRP'))->first();
+        $edit->update([
+            'spesifikasi' => request('spesifikasi'),
+            'kebutuhan' => request('kebutuhan'),
+            'path' => $uniqueFilename
+        ]);
+
+        return redirect()->route('welcome')->with('success','File berhasil diinput,cek email untuk keterangan lebih lanjut');
 
     }
 

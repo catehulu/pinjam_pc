@@ -72,7 +72,7 @@
     </head>
     <body>
         @if ($message = Session::get('success'))
-            <div class="alert alert-success">
+            <div class="alert alert-success" align="center">
                 <p>{{ $message }}</p>
             </div>
         @endif
