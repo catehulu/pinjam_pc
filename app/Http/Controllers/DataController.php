@@ -5,6 +5,7 @@ namespace Pinjam\Http\Controllers;
 use Illuminate\Http\Request;
 use Pinjam\Data;
 use Illuminate\Support\Facades\DB;
+use PDF;
 
 class DataController extends Controller
 {
@@ -47,7 +48,7 @@ class DataController extends Controller
     public function store(Request $request)
     {   
         $validatedData = $request->validate([
-            'NRP' => 'required|min:14',
+            'NRP' => 'required|min:14|unique:data',
             'nama' => 'required',
             'No_Telp' => 'required',
             'Email' => 'required',
@@ -150,5 +151,13 @@ class DataController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function generatePDF($id)
+    {
+        $data = Data::where('id',$id)->first();
+        $pdf = PDF::loadView('surat',compact('data'))->setPaper('A4');
+        return $pdf->download('Surat Reservasi Komputer.pdf');
+        //return view('surat',compact('data'));
     }
 }

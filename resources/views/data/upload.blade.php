@@ -22,7 +22,7 @@
                         <div class="form-group row">
                             <label for="NRP" class="col-sm-4 col-form-label text-md-right">NRP</label>
                             <div class="col-md-6">
-                                <input id="NRP" type="text" class="form-control" name="NRP" value="" required autofocus>
+                                <input id="NRP" type="text" class="form-control" name="NRP" value="" required autofocus maxlength="14">
                             </div>
                         </div>
 

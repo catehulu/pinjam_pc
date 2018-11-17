@@ -36,3 +36,5 @@ Route::get('/upload_berkas', function () {
 })->name('data.upload');
 
 Route::patch('/upload_berkas', 'DataController@upload')->name('data.upload');
+
+Route::get('/download/{id}','DataController@generatePDF')->name('data.pdf');

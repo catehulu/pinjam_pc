@@ -58,7 +58,7 @@
             <div class="table borderless" style="width:50%">
                 <div class="row">
                     <div class="col-sm">
-                        <a name="" id="" class="btn btn-primary" href="#" role="button"><i class="fa fa-file-o" aria-hidden="true"></i>Download PDF</a>
+                        <a name="" id="" class="btn btn-primary" href="{{route('data.pdf',$read->id)}}" role="button"><i class="fa fa-file-o" aria-hidden="true"></i>Download PDF</a>
                     </div>
                     <div class="col-sm">
                         <a name="" id="" class="btn btn-light" href="{{route('welcome')}}" role="button">Kembali</a>
