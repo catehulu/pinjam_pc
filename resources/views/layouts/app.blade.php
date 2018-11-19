@@ -55,6 +55,9 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a href="{{route('komputer.index')}}" class="dropdown-item">
+                                        Monitor Komputer
+                                    </a>
                                     <a href="{{route('data.index')}}" class="dropdown-item">
                                         Lihat Data
                                     </a>

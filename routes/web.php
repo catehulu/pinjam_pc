@@ -38,3 +38,11 @@ Route::get('/upload_berkas', function () {
 Route::patch('/upload_berkas', 'DataController@upload')->name('data.upload');
 
 Route::get('/download/{id}','DataController@generatePDF')->name('data.pdf');
+
+Route::get('/komputer','ControllerKomputer@index')->name('komputer.index');
+
+Route::get('/komputer/status/{id}','ControllerKomputer@readone')->name('komputer.readone');
+
+Route::patch('/pinjam','ControllerKomputer@pinjam')->name('komputer.pinjam');
+
+Route::patch('/kembalikan','ControllerKomputer@kembalikan')->name('komputer.kembalikan');

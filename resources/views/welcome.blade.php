@@ -93,8 +93,9 @@
                     Laravel
                 </div>
 
-                <div class="jumbotron">
+                <div class="container">
                     <a href="{{ route('data.create') }}" class="btn btn-primary btn-lg">Input Data Peminjaman PC</a>
+                    <a href="{{route('data.upload')}}" class="btn btn-primary btn-lg">Upload File Berkas</a>
                 </div>
             </div>
         </div>
