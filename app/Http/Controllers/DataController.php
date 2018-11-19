@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Pinjam\Data;
 use Illuminate\Support\Facades\DB;
 use PDF;
+use Illuminate\Support\Facades\Mail;
+use Pinjam\Mail\EmailDiterima;
+use Pinjam\Mail\EmailDitolak;
 
 class DataController extends Controller
 {
@@ -23,9 +26,11 @@ class DataController extends Controller
 
     public function readone($id)
     {
-        $read = DB::table('data')->where('id',$id)->first();
 
-        return view('data.readone', compact('read'));
+        $read = DB::table('data')->where('id',$id)->first();
+        $komputer = DB::select('select * from komputer where id_peminjam = ?', [$id]);
+
+        return view('data.readone', compact('read','komputer'));
     }
 
 
@@ -112,6 +117,13 @@ class DataController extends Controller
             'STAT' => $stat
         ]);
 
+        if($stat == 1){
+            Mail::to($edit->Email)->send(new EmailDiterima($edit));
+        }
+        else {
+            Mail::to($edit->Email)->send(new EmailDitolak($edit));
+        }
+
         return redirect()->route('data.index')->with('success','Perubahan Sudah di Terapkan');
 
     }
@@ -138,7 +150,7 @@ class DataController extends Controller
             'path' => $uniqueFilename
         ]);
 
-        return redirect()->route('welcome')->with('success','File berhasil diinput,cek email untuk keterangan lebih lanjut');
+        return redirect()->route('welcome')->with('success','File berhasil diinput,email mengenai keterangan lanjut akan dikirimkan secepatnya');
 
     }
 

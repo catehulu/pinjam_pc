@@ -51,11 +51,6 @@
                         <th>{{$read->Akhir_Reservasi}}</th>
                         <th></th>
                     </tr>
-                     <tr>
-                        <th>STAT : </th>
-                        <th>{{$read->STAT}}</th>
-                        <th></th>
-                    </tr>
                     @if ($read->STAT === NULL)
                     <tr>
                         <th>Status : </th>
@@ -76,7 +71,12 @@
                     </tr>
                     <tr>
                         <th>Komputer : </th>
-                        <th></th>
+                        <th>{{$read->id}}</th>
+                    </tr>
+                    @elseif ($read->STAT === 2)
+                    <tr>
+                        <th>Status : </th>
+                        <th>Selesai</th>
                     </tr>
                     @else
                     <tr>
@@ -92,6 +92,7 @@
             </table>
             <div class="table borderless" style="width:50%">
                 <div class="row">
+                    @if ($read->STAT === NULL)
                     <div class="col-sm">
                         <form action="{{route('data.update',[$read->id,1])}}" method="post">
                             {{ method_field('PATCH') }}
@@ -106,6 +107,7 @@
                             <input type="submit" value="Tolak" class="btn btn-dark">
                         </form>
                     </div>
+                    @endif
                     <div class="col-sm">
                             <a href="{{route('data.index')}}" class="btn btn-danger float-right">Kembali</a>
                     </div>

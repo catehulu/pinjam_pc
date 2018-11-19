@@ -50,11 +50,17 @@
                                     <td><div class="btn btn-danger btn-block"></span>Ditolak</div></td>
                                     @elseif ($datas->STAT === 1)
                                     <td><div class="btn btn-success btn-block"></span>Diterima</div></td>
+                                    @elseif ($datas->STAT === 2)
+                                    <td><div class="btn btn-info btn-block"></span>Selesai</div></td>
                                     @else
                                     <td><div class="btn btn-dark btn-block"></span>Error</div></td>
                                     @endif
                                     @if ($datas->path == NULL)
-                                       <td>Belum</td>
+                                       <td>
+                                           <div class="btn btn-dark btn-block">
+                                                <i class="fa fa-question-circle-o" aria-hidden="true"></i></i>Belum
+                                            </div>
+                                        </td>
                                     @else
                                         <td><a name="download" id="download" class="btn btn-secondary" href="storage/filePDF/{{$datas->path}}" role="button" download="">
                                         <i class="fa fa-file-o" aria-hidden="true"></i>Download</a></td>    
