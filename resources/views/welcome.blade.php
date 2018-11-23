@@ -90,12 +90,18 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Reservasi PC NCC
                 </div>
 
-                <div class="container">
-                    <a href="{{ route('data.create') }}" class="btn btn-primary btn-lg">Input Data Peminjaman PC</a>
-                    <a href="{{route('data.upload')}}" class="btn btn-primary btn-lg">Upload File Berkas</a>
+                <div class="row">
+                    <div class="col">
+                        <a href="{{route('data.create') }}" class="img"><img src="{{asset('images/img-komputer2.png')}}" alt="img-komputer"></a>
+                        <a href="{{route('data.create') }}" class="btn btn-primary btn-block">Input Data Peminjaman PC</a> 
+                    </div>
+                    <div class="col">
+                        <a href="{{route('data.upload')}}" class="img"><img src="{{asset('images/img-upload.png')}}" alt="img-upload"></a>                        
+                        <a href="{{route('data.upload')}}" class="btn btn-primary btn-block">Upload File Berkas</a> 
+                    </div>
                 </div>
             </div>
         </div>
