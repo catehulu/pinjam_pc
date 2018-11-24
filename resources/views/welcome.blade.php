@@ -31,6 +31,10 @@
                 height: 100vh;
             }
 
+            .nav-height {
+                height: 9vh;
+            }
+
             .flex-center {
                 align-items: center;
                 display: flex;
@@ -42,12 +46,14 @@
             }
 
             .top-right {
+                background-color: #2f74e2;
                 position: absolute;
                 right: 10px;
                 top: 18px;
             }
 
             .top-left {
+                background-color: #2f74e2;
                 position: absolute;
                 left: 10px;
                 top:18px;
@@ -74,27 +80,33 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+
+            #top-bar{
+                background-color: #2f74e2;
+                font-size: 25px;
+            }
         </style>
     </head>
     <body>
+        <div id="top-bar" class="flex-center position-ref nav-height">
+                <div class="top-left"><img src="{{asset('images/logoncc1.png')}}" alt="logo ncc"></div>
+                @if (Route::has('login'))
+                    <div class="top-right links">
+                        @auth
+                            <a href="{{ route('data.index') }}" style="color:#fff" style="font-size: 50px">Home</a>
+                            <a href="{{ route('register') }}" style="color:#fff">Create a new admin account</a>
+                        @else
+                            <a href="{{ route('login') }}">Login as admin</a>
+                        @endauth
+                    </div>
+                @endif
+        </div>
         @if ($message = Session::get('success'))
             <div class="alert alert-success" align="center">
                 <p>{{ $message }}</p>
             </div>
         @endif
-        <div class="flex-center position-ref full-height">
-            <div class="top-left"><img src="{{asset('images/logoncc1.png')}}" alt="logo ncc"></div>
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ route('data.index') }}">Home</a>
-                        <a href="{{ route('register') }}">Create a new admin account</a>
-                    @else
-                        <a href="{{ route('login') }}">Login as admin</a>
-                    @endauth
-                </div>
-            @endif
-
+        <div class="flex-center position-ref full-height" style="background-color">
             <div class="content">
                 <div class="title m-b-md text-dark">
                     Reservasi PC NCC
