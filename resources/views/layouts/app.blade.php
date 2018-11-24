@@ -44,27 +44,31 @@
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
                         @else
-                            <li class="nav-item">
-                                @if (Route::has('register'))
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                @endif
-                            </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+
                                     <a href="{{route('komputer.index')}}" class="dropdown-item">
-                                        Monitor Komputer
+                                        <i class="fa fa-television" aria-hidden="true"></i>Monitor Komputer
                                     </a>
+
                                     <a href="{{route('data.index')}}" class="dropdown-item">
-                                        Lihat Data
+                                        <i class="fa fa-file-o" aria-hidden="true"></i>Lihat Data
                                     </a>
+
+                                    @if (Route::has('register'))
+                                        <a href="{{ route('register') }}" class="dropdown-item">
+                                            <i class="fa fa-user-circle-o" aria-hidden="true"></i>Register
+                                        </a>
+                                    @endif
+
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        <i class="fa fa-window-close-o" aria-hidden="true"></i>{{ __('Logout') }}
                                     </a>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
