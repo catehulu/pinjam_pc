@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Peminjaman PC NCC</title>
         
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -46,14 +46,12 @@
             }
 
             .top-right {
-                background-color: #2f74e2;
                 position: absolute;
                 right: 10px;
                 top: 18px;
             }
 
             .top-left {
-                background-color: #2f74e2;
                 position: absolute;
                 left: 10px;
                 top:18px;
