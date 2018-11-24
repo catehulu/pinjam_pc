@@ -47,6 +47,12 @@
                 top: 18px;
             }
 
+            .top-left {
+                position: absolute;
+                left: 10px;
+                top:18px;
+            }
+
             .content {
                 text-align: center;
             }
@@ -77,6 +83,7 @@
             </div>
         @endif
         <div class="flex-center position-ref full-height">
+            <div class="top-left"><img src="{{asset('images/logoncc1.png')}}" alt="logo ncc"></div>
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
@@ -89,7 +96,7 @@
             @endif
 
             <div class="content">
-                <div class="title m-b-md">
+                <div class="title m-b-md text-dark">
                     Reservasi PC NCC
                 </div>
 

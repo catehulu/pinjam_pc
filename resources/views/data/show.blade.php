@@ -7,7 +7,7 @@
       <div class="card-body">
         <h4 class="card-title">Data yang diinput</h4>
         <p>Jika ada kesalahan data harap kontak admin secepatnya</p>
-        <p>Download file pdf dan upload file setelah diminta tanda tangan</p>
+        <p>Download file pdf dan upload file setelah memberi tanda tangan</p>
         <div class="container " align='center'>
             <table class="table borderless" style="width:50%">
                 <thead>
