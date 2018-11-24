@@ -51,14 +51,6 @@
                                 <a class="nav-link" href="{{ route('login') }}" style="color: #ffffff">Login</a>
                             </li>
                         @else
-<<<<<<< HEAD
-                            <li class="nav-item">
-                                @if (Route::has('register'))
-                                    <a class="nav-link" href="{{ route('register') }}" style="color: #ffffff">Register</a>
-                                @endif
-                            </li>
-=======
->>>>>>> d59b406716211cb6a835d6cedf8dd32472d2e246
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre style="color: #ffffff">
                                     {{ Auth::user()->name }} <span class="caret"></span>
