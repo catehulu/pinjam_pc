@@ -93,10 +93,10 @@
                 @if (Route::has('login'))
                     <div class="top-right links">
                         @auth
-                            <a href="{{ route('data.index') }}" style="color:#fff" style="font-size: 50px">Home</a>
+                            <a href="{{ route('data.index') }}" style="color:#fff">Home</a>
                             <a href="{{ route('register') }}" style="color:#fff">Create a new admin account</a>
                         @else
-                            <a href="{{ route('login') }}">Login as admin</a>
+                            <a href="{{ route('login') }}" style="color:#fff">Login as admin</a>
                         @endauth
                     </div>
                 @endif
