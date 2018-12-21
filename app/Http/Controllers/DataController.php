@@ -7,7 +7,6 @@ use Pinjam\Data;
 use Illuminate\Support\Facades\DB;
 use PDF;
 use Illuminate\Support\Facades\Mail;
-use Pinjam\Mail\EmailDiterima;
 use Pinjam\Mail\EmailDitolak;
 
 class DataController extends Controller
@@ -19,7 +18,7 @@ class DataController extends Controller
      */
     public function index()
     {
-        $data = Data::orderBy('created_at','DESC')->paginate(10);
+        $data = Data::withTrashed()->orderBy('created_at','DESC')->paginate(10);
 
         return view('data.index', compact('data'));
     }
@@ -28,7 +27,7 @@ class DataController extends Controller
     {
 
         $read = DB::table('data')->where('id',$id)->first();
-        $komputer = DB::select('select * from komputer where id_peminjam = ?', [$id]);
+        $komputer = DB::table('komputer')->where('id_peminjam',$id)->first();
 
         return view('data.readone', compact('read','komputer'));
     }
@@ -53,7 +52,7 @@ class DataController extends Controller
     public function store(Request $request)
     {   
         $validatedData = $request->validate([
-            'NRP' => 'required|min:14|unique:data',
+            'NRP' => 'required|min:14|unique:data,NRP,NULL,id,deleted_at,NULL',
             'nama' => 'required',
             'No_Telp' => 'required',
             'Email' => 'required',
@@ -113,15 +112,16 @@ class DataController extends Controller
     public function update(Request $request, $id, $stat)
     {
         $edit = Data::find($id);
-        $edit->update([
-            'STAT' => $stat
-        ]);
-
+        
         if($stat == 1){
-            Mail::to($edit->Email)->send(new EmailDiterima($edit));
+            return redirect()->route('komputer.pilih',$edit->id);
         }
         else {
+            $edit->update([
+                'STAT' => $stat
+            ]);
             Mail::to($edit->Email)->send(new EmailDitolak($edit));
+            $edit->delete();
         }
 
         return redirect()->route('data.index')->with('success','Perubahan Sudah di Terapkan');
@@ -131,7 +131,7 @@ class DataController extends Controller
     public function upload(Request $request)
     {
         $validatedData = $request->validate([
-            'NRP' => 'required|min:14|exists:data,NRP',
+            'NRP' => 'required|min:14|exists:data,NRP,deleted_at,NULL',
             'spesifikasi' => 'required',
             'kebutuhan' => 'required',
             'pdf' => 'required'

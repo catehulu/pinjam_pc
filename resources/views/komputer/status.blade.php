@@ -13,26 +13,6 @@
                         <th>Status : </th>
                     @if ($komputer->id_peminjam == NULL)
                     <th>Tidak ada peminjam</th>
-                </tr>
-                <tr>
-                    <th>Pinjamkan : </th>
-                        <th>
-                            <form action="{{route('komputer.pinjam')}}" method="post">
-                            @csrf
-                            {{ method_field('PATCH') }}
-                            <input type="text" name="id" value="{{$komputer->id}} " hidden>
-                            <div class="form-group">
-                                    <select name="id_peminjam" id="" class="form-control">
-                                        @foreach ($data as $datas)
-                                            <option value="{{$datas->id}}">{{$datas->NRP}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <input type="submit" value="Pinjamkan" class="btn btn-primary">
-                                </div>
-                            </form>
-                        </th>
                     </tr>
                     @else
                         <th>Dipinjam</th>

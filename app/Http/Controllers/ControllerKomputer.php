@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Pinjam\Komputer;
 use Pinjam\Data;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Mail;
+use Pinjam\Mail\EmailDiterima;
 
 class ControllerKomputer extends Controller
 {
@@ -19,6 +22,13 @@ class ControllerKomputer extends Controller
     {
         $komputer = DB::select('select * from komputer');
         return view('komputer/layout',compact('komputer'));
+    }
+
+    public function pilih($id_peminjam)
+    {
+        $data = Data::find($id_peminjam);
+        $komputer = DB::select('select * from komputer');
+        return view('komputer.pilih',compact('komputer','data'));
     }
 
     public function readone($id)
@@ -35,12 +45,17 @@ class ControllerKomputer extends Controller
     }
 
     public function pinjam(Request $request){
-        $komputer = Komputer::where('id',$request->input('id'))->first();
+        $komputer = Komputer::find($request->input('id'));
+        $user = Data::where('id',$request->input('id_peminjam'))->first();
         $komputer->update([
             'id_peminjam' => $request->input('id_peminjam')
         ]);
+        $user->update([
+            'STAT' => '1'
+        ]);
+       // Mail::to($user->Email)->send(new EmailDiterima($user));
 
-        return redirect()->route('komputer.index')->with('success','Status komputer telah berhasil di update!');
+        return redirect()->route('komputer.index')->with('success','Peminjaman telah diterima!');
     }
 
     public function kembalikan(){
@@ -52,6 +67,7 @@ class ControllerKomputer extends Controller
         $data->update([
             'STAT' => 2
         ]);
+        $data->delete();
 
         return redirect()->route('komputer.index')->with('success','Status komputer telah berhasil di update!');
     }

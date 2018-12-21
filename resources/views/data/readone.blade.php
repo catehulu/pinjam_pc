@@ -51,38 +51,56 @@
                         <th>{{$read->Akhir_Reservasi}}</th>
                         <th></th>
                     </tr>
-                    @if ($read->STAT === NULL)
-                    <tr>
-                        <th>Status : </th>
-                        <th>Belum diproses</th>
-                        <th></th>
-                    </tr>
-                    @elseif ($read->STAT === 0)
-                    <tr>
-                        <th>Status : </th>
-                        <th>Ditolak</th>
-                        <th></th>
-                    </tr>
-                    @elseif ($read->STAT === 1)
-                    <tr>
-                        <th>Nama : </th>
-                        <th>Diterima</th>
-                        <th></th>
-                    </tr>
-                    <tr>
-                        <th>Komputer : </th>
-                        <th>{{$read->id}}</th>
-                    </tr>
-                    @elseif ($read->STAT === 2)
-                    <tr>
-                        <th>Status : </th>
-                        <th>Selesai</th>
-                    </tr>
+                    @if ($read->path === NULL)
+                        <tr>
+                            <th>
+                                Menunggu upload File
+                            </th>
+                        </tr>
                     @else
-                    <tr>
-                        <th>Status : </th>
-                        <th>Kesalahan Database</th>
-                    </tr>
+                        <tr>
+                            <th>Spesifikasi : </th>
+                            <th>{{$read->spesifikasi}}</th>
+                        </tr>
+                        <tr>
+                            <th>kebutuhan : </th>
+                            <th>{{$read->kebutuhan}}</th>
+                        </tr>
+                        @if ($read->STAT === NULL)
+                        <tr>
+                            <th>Status : </th>
+                            <th>Belum diproses</th>
+                            <th></th>
+                        </tr>
+                        @elseif ($read->STAT === 0)
+                        <tr>
+                            <th>Status : </th>
+                            <th>Ditolak</th>
+                            <th></th>
+                        </tr>
+                        @elseif ($read->STAT === 1)
+                        <tr>
+                            <th>Nama : </th>
+                            <th>Diterima</th>
+                            <th></th>
+                        </tr>
+                        @if ($komputer != NULL)
+                            <tr>
+                                <th>Komputer : </th>
+                                <th>{{$komputer->id}}</th>
+                            </tr>    
+                        @endif
+                        @elseif ($read->STAT === 2)
+                        <tr>
+                            <th>Status : </th>
+                            <th>Selesai</th>
+                        </tr>
+                        @else
+                        <tr>
+                            <th>Status : </th>
+                            <th>Kesalahan Database</th>
+                        </tr>
+                        @endif
                     @endif
                     <tr>
                     </tr>
@@ -92,7 +110,7 @@
             </table>
             <div class="table borderless" style="width:50%">
                 <div class="row">
-                    @if ($read->STAT === NULL)
+                    @if ($read->STAT === NULL && $read->path != NULL)
                     <div class="col-sm">
                         <form action="{{route('data.update',[$read->id,1])}}" method="post">
                             {{ method_field('PATCH') }}

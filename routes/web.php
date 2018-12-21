@@ -46,3 +46,5 @@ Route::get('/komputer/status/{id}','ControllerKomputer@readone')->name('komputer
 Route::patch('/pinjam','ControllerKomputer@pinjam')->name('komputer.pinjam');
 
 Route::patch('/kembalikan','ControllerKomputer@kembalikan')->name('komputer.kembalikan');
+
+Route::get('/admin/pilih/{id}','ControllerKomputer@pilih')->name('komputer.pilih');
