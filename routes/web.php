@@ -1,4 +1,5 @@
 <?php
+use Pinjam\Barang;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,6 +13,10 @@
 */
 
 Route::get('/', function () {
+    return view('welcome');
+})->name('welcome');
+
+Route::get('/test', function () {
     return view('welcome');
 })->name('welcome');
 
@@ -32,7 +37,8 @@ Route::patch('/admin/readone/{id}/update/{stat}', 'DataController@update')->name
 Route::get('/show', 'DataController@show')->name('data.show');
 
 Route::get('/upload_berkas', function () {
-    return view('data.upload');
+    $barangs = Barang::all();
+    return view('data.upload2',compact('barangs'));
 })->name('data.upload');
 
 Route::patch('/upload_berkas', 'DataController@upload')->name('data.upload');
@@ -48,3 +54,31 @@ Route::patch('/pinjam','ControllerKomputer@pinjam')->name('komputer.pinjam');
 Route::patch('/kembalikan','ControllerKomputer@kembalikan')->name('komputer.kembalikan');
 
 Route::get('/admin/pilih/{id}','ControllerKomputer@pilih')->name('komputer.pilih');
+
+//Peminjaman barang
+
+Route::get('/barang/admin/create', 'BarangController@create')->name('Barang.create');
+
+Route::get('/barang/admin', 'BarangController@index')->name('Barang.index');
+
+Route::get('/barang/admin/readone/{id}', 'BarangController@readone')->name('Barang.readone');
+
+Route::post('/barang/admin/create', 'BarangController@store')->name('Barang.store');
+
+Route::patch('/barang/admin/{barang}', 'BarangController@update')->name('Barang.update');
+
+Route::get('/barang/delete/{barang}', 'BarangController@destroy')->name('Barang.delete');
+
+Route::get('/barang/admin/{barang}', 'BarangController@edit')->name('Barang.edit');
+
+Route::get('/download/barang/{peminjamBarang}','PeminjamBarangController@generatePDF')->name('peminjam.pdf');
+
+Route::get('/barang/create', 'PeminjamBarangController@create')->name('peminjam.create');
+
+Route::post('/barang/create', 'PeminjamBarangController@store')->name('peminjam.store');
+
+Route::get('/barang/show/{peminjamBarang}', 'PeminjamBarangController@show')->name('peminjam.show');
+
+Route::patch('/barang/update/{peminjamBarang}', 'PeminjamBarangController@update')->name('peminjam.update');
+
+Route::patch('/barang/upload', 'PeminjamBarangController@upload')->name('peminjam.upload');

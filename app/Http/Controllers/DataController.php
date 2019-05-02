@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use PDF;
 use Illuminate\Support\Facades\Mail;
 use Pinjam\Mail\EmailDitolak;
+use Pinjam\PeminjamBarang;
 
 class DataController extends Controller
 {
@@ -16,11 +17,11 @@ class DataController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index(){
         $data = Data::withTrashed()->orderBy('created_at','DESC')->paginate(10);
+        $peminjams = PeminjamBarang::orderBy('created_at','DESC')->paginate(10);
 
-        return view('data.index', compact('data'));
+        return view('data.index', compact('data','peminjams'));
     }
 
     public function readone($id)
@@ -120,7 +121,7 @@ class DataController extends Controller
             $edit->update([
                 'STAT' => $stat
             ]);
-            Mail::to($edit->Email)->send(new EmailDitolak($edit));
+            // Mail::to($edit->Email)->send(new EmailDitolak($edit));
             $edit->delete();
         }
 

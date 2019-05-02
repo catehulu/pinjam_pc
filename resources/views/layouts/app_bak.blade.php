@@ -7,42 +7,11 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Reservasi NCC</title>
+    <title>Peminjaman PC NCC</title>
 
     <!-- Scripts -->
-    
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script>
-        $(document).ready(function() { 
-            $('#pilihan').change(function() {
-                var optionID = $('option:selected').attr('id');
-                if(optionID=="pilihpc")
-                {
-                    $("#formpc").show();
-                    $("#formbarang").hide();
-                }
-                else if(optionID=="pilihbarang")
-                {
-                    $("#formbarang").show();
-                    $("#formpc").hide();
-                }
 
-                else if(optionID=="menubarang")
-                {
-                    $("#barang").show();
-                    $("#pc").hide();
-                }
-
-                else if(optionID=="menupc")
-                {
-                    $("#pc").show();
-                    $("#barang").hide();
-                }
-
-            });  
-        });
-   </script>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
@@ -55,7 +24,6 @@
         }
 
     </style>
-    
 
 </head>
 <body>
@@ -63,7 +31,7 @@
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel" id="top-bar">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}" style="color: #ffffff">
-                    Reservasi NCC
+                    Peminjaman PC NCC
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
